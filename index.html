@@ -718,6 +718,12 @@
     font-size:0.9rem;
     color:var(--accent);
   }
+  .join-msg{
+    font-size:0.92rem;
+    color:var(--accent);
+    min-height:0;
+  }
+  .join-msg.is-error{ color:#E8827A; }
   @media (max-width:640px){
     .join-row{ flex-direction:column; }
   }
@@ -977,12 +983,17 @@
 
   <form class="join-form reveal d2" id="joinForm">
     <div class="join-title">¿Te interesa sumarte? Dejame tus datos.</div>
+    <input type="hidden" name="access_key" value="f1ffc195-af49-4f43-9036-fef479fda05e">
+    <input type="hidden" name="subject" value="Formulario Flip PH">
+    <input type="hidden" name="from_name" value="Flip de PH — Estudio Esquina">
+    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
     <div class="join-row">
-      <input type="text" name="nombre" placeholder="Nombre" required>
-      <input type="email" name="email" placeholder="Tu email" required>
+      <input type="text" name="Nombre" placeholder="Nombre" required>
+      <input type="email" name="Email" placeholder="Tu email" required>
     </div>
-    <input type="text" name="monto" placeholder="¿Cuánto estarías dispuesto a invertir?" required>
+    <input type="text" name="Monto a invertir" placeholder="¿Cuánto estarías dispuesto a invertir?" required>
     <button type="submit">Quiero sumarme</button>
+    <div class="join-msg" id="joinMsg"></div>
   </form>
 
   <div class="sign reveal d2">
@@ -1004,22 +1015,39 @@
     card.addEventListener('click', () => card.classList.toggle('flip'));
   });
 
-  /* ---------- join form -> mailto ---------- */
+  /* ---------- join form -> Web3Forms ---------- */
   const joinForm = document.getElementById('joinForm');
   if (joinForm){
-    joinForm.addEventListener('submit', function(e){
+    const joinMsg = document.getElementById('joinMsg');
+    joinForm.addEventListener('submit', async function(e){
       e.preventDefault();
-      const nombre = this.nombre.value.trim();
-      const email = this.email.value.trim();
-      const monto = this.monto.value.trim();
-      const to = 'estudioesquina.arq@gmail.com';
-      const subject = encodeURIComponent('Quiero sumarme al flip de PH — ' + nombre);
-      const body = encodeURIComponent(
-        'Nombre: ' + nombre + '\n' +
-        'Email: ' + email + '\n' +
-        'Monto que estaría dispuesto a invertir: ' + monto + '\n'
-      );
-      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+      joinMsg.textContent = '';
+      joinMsg.classList.remove('is-error');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(this)
+        });
+        const result = await res.json();
+        if (result.success) {
+          this.reset();
+          joinForm.querySelectorAll('input:not([type=hidden]), button').forEach(el => el.style.display = 'none');
+          joinMsg.textContent = '¡Listo! Ya me llegó tu consulta, te contacto pronto.';
+        } else {
+          throw new Error(result.message || 'error');
+        }
+      } catch (err) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        joinMsg.classList.add('is-error');
+        joinMsg.textContent = 'Hubo un problema al enviar. Probá de nuevo o escribime directo a estudioesquina.arq@gmail.com';
+      }
     });
   }
 
