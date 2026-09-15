@@ -649,7 +649,7 @@
     font-size:clamp(1rem, 1.4vw, 1.15rem);
   }
   #close .sign{
-    margin-top:7vh;
+    margin-top:4vh;
     font-size:1rem;
     color:var(--ink-soft);
   }
@@ -657,6 +657,69 @@
     color:var(--ink);
     text-decoration:none;
     border-bottom:1px solid var(--ink-faint);
+  }
+
+  .join-form{
+    margin-top:5vh;
+    width:100%;
+    max-width:560px;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    background: rgb(var(--bg-base) / 0.5);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border:1px solid var(--hair);
+    border-radius:16px;
+    padding: 3vh 1.8rem;
+  }
+  .join-title{
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--ink);
+    margin-bottom:0.2rem;
+  }
+  .join-row{
+    display:flex;
+    gap:1rem;
+  }
+  .join-form input{
+    flex:1;
+    width:100%;
+    font-family:inherit;
+    font-size:0.95rem;
+    color:var(--ink);
+    background:rgb(var(--bg-base) / 0.6);
+    border:1px solid var(--hair);
+    border-radius:10px;
+    padding:0.85rem 1rem;
+    outline:none;
+  }
+  .join-form input::placeholder{ color:var(--ink-faint); }
+  .join-form input:focus{ border-color:var(--accent); }
+  .join-form button{
+    align-self:flex-start;
+    font-family:inherit;
+    font-weight:700;
+    font-size:0.95rem;
+    color:#141210;
+    background:var(--accent);
+    border:none;
+    border-radius:999px;
+    padding:0.85rem 1.8rem;
+    cursor:pointer;
+    transition: opacity .3s ease, transform .2s ease;
+  }
+  .join-form button:hover{ opacity:0.85; }
+  .join-form button:active{ transform:scale(0.97); }
+  .join-form .join-ok{
+    display:none;
+    font-size:0.9rem;
+    color:var(--accent);
+  }
+  @media (max-width:640px){
+    .join-row{ flex-direction:column; }
   }
 
   @media (max-width: 680px){
@@ -829,9 +892,9 @@
           <div class="note">El fee de administración y la comisión de venta se descuentan al cierre, no se aportan antes.</div>
         </div>
         <div class="combo-card">
-          <div class="k">Ganancia bruta estimada</div>
-          <div class="v">USD <span class="accent">56.000</span></div>
-          <div class="note">Venta menos compra, reforma y comisiones.</div>
+          <div class="k">Ganancia neta estimada</div>
+          <div class="v">USD <span class="accent">40.200</span></div>
+          <div class="note">Precio de venta menos el total de la inversión (USD 230.000 − USD 189.800).</div>
         </div>
         <div class="combo-card obj">
           <div class="k">El objetivo de compra</div>
@@ -853,31 +916,31 @@
       <span></span>
       <span class="icon-label"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="1.6"/><circle cx="11" cy="11" r="1.6"/><line x1="11.5" y1="4.5" x2="4.5" y2="11.5"/></svg><span>% Part.</span></span>
       <span class="icon-label"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="4.5" width="13" height="9" rx="1.5"/><path d="M1.5 7h13"/><circle cx="11.5" cy="10" r="1"/></svg><span>Aporta</span></span>
-      <span class="icon-label"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13V9M6 13V6M10 13V8M14 13V3"/></svg><span>Gana (bruto)</span></span>
+      <span class="icon-label"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13V9M6 13V6M10 13V8M14 13V3"/></svg><span>Gana (neto)</span></span>
       <span class="icon-label"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13L13 3M13 3H7M13 3V9"/></svg><span>Retorno</span></span>
     </div>
     <div class="reparto-row">
       <span class="name">Nico</span>
       <span class="num">34%</span>
       <span class="num">USD 60.044</span>
-      <span class="num">USD 16.116</span>
-      <span class="num hi">27%</span>
+      <span class="num">USD 13.668</span>
+      <span class="num hi">23%</span>
     </div>
     <div class="reparto-row">
       <span class="name">Inversor 2</span>
       <span class="num">33%</span>
       <span class="num">USD 58.278</span>
-      <span class="num">USD 15.642</span>
-      <span class="num hi">27%</span>
+      <span class="num">USD 13.266</span>
+      <span class="num hi">23%</span>
     </div>
     <div class="reparto-row">
       <span class="name">Inversor 3</span>
       <span class="num">33%</span>
       <span class="num">USD 58.278</span>
-      <span class="num">USD 15.642</span>
-      <span class="num hi">27%</span>
+      <span class="num">USD 13.266</span>
+      <span class="num hi">23%</span>
     </div>
-    <p class="reparto-note">Partes iguales a modo de ejemplo. "Retorno" es la ganancia bruta sobre lo que cada uno aportó — no está descontado el Impuesto a las Ganancias personal de cada inversor, eso se calcula en particular según la situación de cada uno una vez finalizada la venta.</p>
+    <p class="reparto-note">Partes iguales a modo de ejemplo. "Gana (neto)" es la parte de la ganancia neta (venta menos el total de la inversión) que le toca a cada uno según su % — no está descontado el Impuesto a las Ganancias personal de cada inversor, eso se calcula en particular según la situación de cada uno una vez finalizada la venta.</p>
   </div>
 </section>
 
@@ -911,6 +974,17 @@
     <div class="step"><span class="n">2</span><p>Constituyo el fideicomiso, con contrato y CUIT propio.</p></div>
     <div class="step"><span class="n">3</span><p>Salimos a buscar un PH dentro del criterio: hasta USD 1.200 el m².</p></div>
   </div>
+
+  <form class="join-form reveal d2" id="joinForm">
+    <div class="join-title">¿Te interesa sumarte? Dejame tus datos.</div>
+    <div class="join-row">
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <input type="email" name="email" placeholder="Tu email" required>
+    </div>
+    <input type="text" name="monto" placeholder="¿Cuánto estarías dispuesto a invertir?" required>
+    <button type="submit">Quiero sumarme</button>
+  </form>
+
   <div class="sign reveal d2">
     Arq. Nicolás Barzana · <a href="https://www.instagram.com/estudio.esquina/" target="_blank" rel="noopener">@estudio.esquina</a>
   </div>
@@ -929,6 +1003,25 @@
   workCards.forEach(card => {
     card.addEventListener('click', () => card.classList.toggle('flip'));
   });
+
+  /* ---------- join form -> mailto ---------- */
+  const joinForm = document.getElementById('joinForm');
+  if (joinForm){
+    joinForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const nombre = this.nombre.value.trim();
+      const email = this.email.value.trim();
+      const monto = this.monto.value.trim();
+      const to = 'estudioesquina.arq@gmail.com';
+      const subject = encodeURIComponent('Quiero sumarme al flip de PH — ' + nombre);
+      const body = encodeURIComponent(
+        'Nombre: ' + nombre + '\n' +
+        'Email: ' + email + '\n' +
+        'Monto que estaría dispuesto a invertir: ' + monto + '\n'
+      );
+      window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+    });
+  }
 
   /* ---------- scroll parallax for photos ---------- */
   const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
